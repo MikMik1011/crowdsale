@@ -18,4 +18,12 @@ contract Crowdsale is ERC20, Ownable {
         buyins[msg.sender] += msg.value;
         totalBuyin += msg.value;
     }
+
+    function getBuyin(address _addr) external view returns (uint256) {
+        return buyins[_addr];
+    }
+
+    function getTotalBuyin() external view returns (uint256) {
+        return totalBuyin;
+    }
 }

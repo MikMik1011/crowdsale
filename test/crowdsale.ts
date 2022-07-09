@@ -68,7 +68,7 @@ describe("Crowdsale", () => {
     });
 
     describe("withdraw", async() => {
-        it.skip("should withdraw tokens and distribute them evenly", async () => {
+        it.only("should withdraw tokens and distribute them evenly", async () => {
             await crowdsale.buy({ value: ethers.utils.parseEther("2") });
             let crowdsale1 = await crowdsale.connect(signers[1]);
             await crowdsale1.buy({ value: ethers.utils.parseEther("6") });
@@ -76,7 +76,7 @@ describe("Crowdsale", () => {
             await ethers.provider.send("evm_mine", []);
             await crowdsale.withdraw();
             // the line below fails idk why
-            await expect(BigNumber.from(crowdsale.balanceOf(signers[0].address))).to.eq(ethers.utils.parseEther("1"));
+            await expect(crowdsale.balanceOf(signers[0].address)).to.eq(ethers.utils.parseEther("1"));
             await crowdsale1.withdraw();
             await expect(crowdsale1.balanceOf(signers[1].address)).to.eq(ethers.utils.parseEther("3"));
         });

@@ -14,7 +14,7 @@ contract Crowdsale is ERC20, Ownable {
     }
 
     function buy() external payable {
-        require(block.timestamp < creationTime_ + 3 days, "Buy-in phase is over!");
+        require(block.timestamp <= creationTime_ + 3 days, "Buy-in phase is over!");
         buyins[msg.sender] += msg.value;
         totalBuyin += msg.value;
     }
@@ -25,5 +25,10 @@ contract Crowdsale is ERC20, Ownable {
 
     function getTotalBuyin() external view returns (uint256) {
         return totalBuyin;
+    }
+
+    function withdrawEth() external onlyOwner {
+        require(block.timestamp >= creationTime_ + 3 days, "Buy-in phase is not finished!");
+        payable(msg.sender).transfer(address(this).balance);
     }
 }

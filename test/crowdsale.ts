@@ -23,7 +23,7 @@ describe("Crowdsale", () => {
             "Crowdsale",
             signers[0]
         );
-        crowdsale = (await crowdsaleFactory.deploy(10)) as Crowdsale;
+        crowdsale = (await crowdsaleFactory.deploy(4)) as Crowdsale;
         await crowdsale.deployed();
 
         expect(crowdsale.address).to.properAddress;
@@ -68,17 +68,16 @@ describe("Crowdsale", () => {
     });
 
     describe("withdraw", async() => {
-        it.only("should withdraw tokens and distribute them evenly", async () => {
+        it("should withdraw tokens and distribute them evenly", async () => {
             await crowdsale.buy({ value: ethers.utils.parseEther("2") });
             let crowdsale1 = await crowdsale.connect(signers[1]);
             await crowdsale1.buy({ value: ethers.utils.parseEther("6") });
             await ethers.provider.send("evm_increaseTime", [(3 * 24 * 60 * 60) + 1]);
             await ethers.provider.send("evm_mine", []);
             await crowdsale.withdraw();
-            // the line below fails idk why
-            await expect(crowdsale.balanceOf(signers[0].address)).to.eq(ethers.utils.parseEther("1"));
+            expect(await crowdsale.balanceOf(signers[0].address)).to.eq(ethers.utils.parseEther("1"));
             await crowdsale1.withdraw();
-            await expect(crowdsale1.balanceOf(signers[1].address)).to.eq(ethers.utils.parseEther("3"));
+            expect(await crowdsale1.balanceOf(signers[1].address)).to.eq(ethers.utils.parseEther("3"));
         });
 
         it("should revert on second withdraw attempt", async () => {

@@ -45,12 +45,12 @@ describe("Crowdsale", () => {
 
     });
 
-    describe("withdrawEth", async() => {
+    describe("collectEth", async() => {
         it("should withdraw ether", async () => {
             await crowdsale.buy({ value: ethers.utils.parseEther("1") });
             await ethers.provider.send("evm_increaseTime", [(3 * 24 * 60 * 60) + 1]);
             await ethers.provider.send("evm_mine", []);
-            await crowdsale.withdrawEth();
+            await crowdsale.collectEth();
             expect(await ethers.provider.getBalance(crowdsale.address)).to.eq(ethers.utils.parseEther("0"));
             //TODO: check if amount is transferred to owner 
             //expect(await ethers.provider.getBalance(signers[0].address)).to.eq(ethers.utils.parseEther("1"));
@@ -58,12 +58,12 @@ describe("Crowdsale", () => {
 
         it("should revert during buy-in phase", async () => {
             await crowdsale.buy({ value: ethers.utils.parseEther("1") });
-            await expect(crowdsale.withdrawEth()).to.be.revertedWith(generateErrorMsg("Buy-in phase is not finished!"));
+            await expect(crowdsale.collectEth()).to.be.revertedWith(generateErrorMsg("Buy-in phase is not finished!"));
         });
 
         it("should revert if not owner of contract", async () => {
             crowdsale = await crowdsale.connect(signers[1]);
-            await expect(crowdsale.withdrawEth()).to.be.revertedWith(generateErrorMsg("Ownable: caller is not the owner"));
+            await expect(crowdsale.collectEth()).to.be.revertedWith(generateErrorMsg("Ownable: caller is not the owner"));
         });
     });
 });

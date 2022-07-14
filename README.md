@@ -1,1 +1,1 @@
-# An exercise ERC20 token made for Moonwalk 2.0
+# Exercise stuff made for Moonwalk 2.0 internship

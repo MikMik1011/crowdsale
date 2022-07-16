@@ -1,7 +1,7 @@
 {
   "name": "crowdsalev2",
   "version": "1.0.0",
-  "description": "crowdsalev2",
+  "description": "An exercise ERC20 token made for Moonwalk 2.0",
   "main": "index.js",
   "scripts": {
     "build": "npm run clean && npm run compile",

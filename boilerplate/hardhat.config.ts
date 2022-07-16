@@ -3,6 +3,7 @@ import { HardhatUserConfig } from "hardhat/config";
 import "@typechain/hardhat"
 import "@nomiclabs/hardhat-ethers"
 import "@nomiclabs/hardhat-waffle"
+import "hardhat-gas-reporter"
 
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",

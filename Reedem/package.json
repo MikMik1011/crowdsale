@@ -1,7 +1,7 @@
 {
-  "name": "CHANGEME",
+  "name": "reedem",
   "version": "1.0.0",
-  "description": "CHANGEME",
+  "description": "reedem",
   "main": "index.js",
   "scripts": {
     "build": "npm run clean && npm run compile",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MikMik1011/CHANGEME.git"
+    "url": "git+https://github.com/MikMik1011/reedem.git"
   },
   "author": "MikMik",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/MikMik1011/CHANGEME/issues"
+    "url": "https://github.com/MikMik1011/reedem/issues"
   },
-  "homepage": "https://github.com/MikMik1011/CHANGEME#readme",
+  "homepage": "https://github.com/MikMik1011/reedem#readme",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",

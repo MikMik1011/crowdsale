@@ -12,19 +12,13 @@ contract ERC20Mintable is ERC20, Ownable {
     constructor(string memory name, string memory symbol) ERC20(name, symbol) {}
 
     function addMinter(address minter) external onlyOwner {
-        require(minter != address(0), "Minter cannot be the zero address");
         require(!isMinter(minter), "Minter is already added");
         minters[minter] = true;
     }
 
     function removeMinter(address minter) external onlyOwner {
-        require(minter != address(0), "Minter cannot be the zero address");
         require(isMinter(minter), "Minter is not added");
         minters[minter] = false;
-    }
-
-    function isMinter(address minter) internal view returns (bool) {
-        return minters[minter];
     }
 
     function mint(address to, uint256 amount) external {
@@ -32,4 +26,10 @@ contract ERC20Mintable is ERC20, Ownable {
         _mint(to, amount);
         emit Mint(to, amount);
     }
+
+    function isMinter(address minter) internal view returns (bool) {
+        return minters[minter];
+    }
+
+    
 }

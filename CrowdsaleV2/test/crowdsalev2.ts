@@ -29,12 +29,14 @@ describe('CrowdsaleV2', () => {
 
 		expect(crowdsalev2.address).to.properAddress;
 
-
 		const erc20mintableFactory = await ethers.getContractFactory(
 			'ERC20Mintable',
 			signers[0]
 		);
-		erc20mintable = (await erc20mintableFactory.deploy("Crowdsale V2", "CRS2")) as ERC20Mintable;
+		erc20mintable = (await erc20mintableFactory.deploy(
+			'Crowdsale V2',
+			'CRS2'
+		)) as ERC20Mintable;
 		await erc20mintable.deployed();
 
 		expect(erc20mintable.address).to.properAddress;
@@ -46,7 +48,7 @@ describe('CrowdsaleV2', () => {
 	describe('buy', async () => {
 		it('should register buy-in', async () => {
 			await crowdsalev2.buy({ value: ethers.utils.parseEther('1') });
-            
+
 			expect(await crowdsalev2.getBuyin(signers[0].address)).to.eq(
 				ethers.utils.parseEther('1')
 			);
